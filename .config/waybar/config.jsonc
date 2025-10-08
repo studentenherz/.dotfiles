@@ -1,0 +1,173 @@
+{
+  "margin-top" : 5,
+  "margin-left": 10,
+  "margin-right": 10,
+  "height" : 30,
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/waybar-mpris",
+  ],
+  "modules-center": [
+  "clock",
+  ],
+  "modules-right": [
+  "group/group-main-right",
+  "group/group-tray",
+  "group/group-power",
+  ],
+  "custom/waybar-mpris": {
+    "return-type": "json",
+    "exec": "waybar-mpris --autofocus --order \"SYMBOL:ARTIST:TITLE:POSITION\"", // --format=\"%i  [%p/%d] %a - %t\"",
+    "on-click": "waybar-mpris --send toggle",
+    // This option will switch between players on right click.
+    "on-click-right": "waybar-mpris --send player-next",
+    // The options below will switch the selected player on scroll
+    // "on-scroll-up": "waybar-mpris --send player-next",
+    // "on-scroll-down": "waybar-mpris --send player-prev",
+    // The options below will go to next/previous track on scroll
+    // "on-scroll-up": "waybar-mpris --send next",
+    // "on-scroll-down": "waybar-mpris --send prev",
+    "escape": true, 
+    "max-length": 50,
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 35,
+    "rewrite": {
+      "": "Harsh"
+    },
+    "separate-outputs": true,
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "*": 4,
+      "HDMI-A-1": 3
+    },
+  },
+  "clock": {
+    "interval": 1,
+    "format": "{:%d - %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%H:%M:%S}",
+    "timezone": "America/Argentina/Salta",
+    "calendar": {
+            // "mode"          : "month",
+            // "mode-mon-col"  : 3,
+            // "weeks-pos"     : "right",
+            // "on-scroll"     : 1,
+            "format": {
+                      "months":     "<span color='#ffead3'><b>{}</b></span>",
+                      "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                      "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                      "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                      "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                      }
+            }
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": " {}%"
+  },
+  "temperature": {
+    "hwmon-path": "/sys/devices/platform/dell_smm_hwmon/hwmon/hwmon5/temp1_input",
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": ["", "", ""]
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-full": "{icon}  {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "network": {
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "{cidr} ",
+    "tooltip-format": "{ifname}: {essid} [{gwaddr}]",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": " ⚠ ",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": "",
+    "format-icons": {
+      "headphones": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "cycle_sinks.sh"
+  },
+  "tray": {
+    "spacing": 15
+  },
+  "group/group-power": {
+    "orientation": "inherit",
+    "drawer": {
+        "transition-duration": 500,
+        "children-class": "not-power",
+        "transition-left-to-right": false,
+    },
+    "modules": [
+        "custom/power",
+        "custom/quit",
+        "custom/lock",
+        "custom/reboot",
+      ]
+  },
+  "custom/quit": {
+      "format": "󰗼",
+      "tooltip": false,
+      "on-click": "hyprctl dispatch exit"
+  },
+  "custom/lock": {
+      "format": "󰍁",
+      "tooltip": false,
+      "on-click": "hyprlock"
+  },
+  "custom/reboot": {
+      "format": "󰜉",
+      "tooltip": false,
+      "on-click": "reboot"
+  },
+  "custom/power": {
+      "format": "",
+      "tooltip": false,
+      "on-click": "shutdown now"
+  },
+  "group/group-tray": {
+    "orientation": "inherit",
+    "modules": [
+      "tray",
+    ],
+  },
+  "group/group-main-right": {
+    "orientation": "inherit",
+    "modules": [
+      "pulseaudio",
+      "network",
+      "cpu",
+      "memory",
+      "temperature",
+      "battery",
+    ]
+  } 
+}
