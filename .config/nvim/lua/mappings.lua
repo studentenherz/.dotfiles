@@ -37,3 +37,6 @@ map("n", "<leader>dr", "<cmd> DapContinue <cr>", { desc = "Start or continued th
 
 map("n", "<leader>gd", ":Gitsigns preview_hunk <CR>", { desc = "Preview git hunk" })
 map("n", "<leader>gs", ":Gitsigns stage_hunk <CR>", { desc = "Stage git hunk" })
+
+vim.keymap.set('n', '4', '$', { noremap = true, silent = true, desc = 'Go to end of line' })
+vim.keymap.set('n', '6', '^', { noremap = true, silent = true, desc = 'Go to first non-blank character' })
