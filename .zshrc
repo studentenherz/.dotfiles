@@ -1,3 +1,6 @@
+unset NVM_AUTH_HEADER
+export NVM_NODEJS_ORG_MIRROR="https://nodejs.org/dist"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -24,6 +27,8 @@ export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 # asdf shims
 export PATH="$PATH:$HOME/.asdf/shims"
+# Dart SDK
+export PATH="$HOME/sdk/dart-sdk/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -216,3 +221,11 @@ cf() {
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# pnpm
+export PNPM_HOME="/home/maxwell/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
