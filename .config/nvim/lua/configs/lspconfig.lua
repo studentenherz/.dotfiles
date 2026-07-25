@@ -19,6 +19,7 @@ for _, lsp in ipairs(servers) do
 end
 
 vim.lsp.config("rust_analyzer", {
+  cmd = { "rustup", "run", "stable", "rust-analyzer" },
   on_attach = function(client, bufnr)
     nvlsp.on_attach(client, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
